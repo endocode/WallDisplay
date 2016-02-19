@@ -37,7 +37,10 @@ void WallDisplaySettings::on_addUrl_clicked()
     /*Get new URL from input dialog*/
     QString newUrl = QInputDialog::getText(this, "Add new URL", "URL:", QLineEdit::Normal, "", &ok);
 
-    // TODO: validate URL
+    if (!newUrl.startsWith("http")) {
+        newUrl.insert(0, QString("http://"));
+    }
+
     if(ok && !newUrl.isEmpty()) {
         new QListWidgetItem(newUrl, listWidget);
     }
